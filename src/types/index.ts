@@ -1,5 +1,3 @@
-import { FieldValues } from 'react-hook-form';
-
 // User related types
 export interface UserFormData {
     fullname: string;
@@ -41,7 +39,7 @@ export interface FormItemProps {
     children: React.ReactElement;
 }
 
-export interface FormComponentProps<T extends FieldValues> {
+export interface FormComponentProps<T> {
     onSubmit: (data: T) => void;
     resolver?: any;
     defaultValues?: Partial<T>;

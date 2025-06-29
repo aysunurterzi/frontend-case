@@ -1,24 +1,18 @@
 import { PropsWithChildren } from 'react';
-import { FieldValues, FormProvider, useForm } from 'react-hook-form';
 import { FormComponentProps } from '../../types';
 
-export const Form = <T extends FieldValues>({
+export const Form = <T extends Record<string, any>>({
     onSubmit,
     children,
-    resolver,
-    defaultValues,
     ...rest
 }: PropsWithChildren<FormComponentProps<T>>) => {
-    const methods = useForm<T>({ 
-        ...rest, 
-        resolver
-    });
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+  };
 
     return (
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
-            <FormProvider {...methods}>
-                {children}
-            </FormProvider>
+        <form onSubmit={handleSubmit} {...rest}>
+            {children}
         </form>
     );
 };
