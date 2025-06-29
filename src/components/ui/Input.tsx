@@ -25,6 +25,7 @@ export const Input: React.FC<InputProps> = ({
                     }
                     ${className}
                 `}
+                autoComplete={isPasswordType ? 'current-password' : undefined}
                 {...props}
             />
             {isPasswordType && (
