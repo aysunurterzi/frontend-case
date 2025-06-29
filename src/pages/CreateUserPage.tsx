@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { Checkbox } from '../components/ui/Checkbox';
 import { Input } from '../components/ui/Input';
+import { PasswordInput } from '../components/ui/PasswordInput';
 import { UserService } from '../services/userService';
 import { ValidationService } from '../services/validationService';
 import { UserFormData, ValidationErrors } from '../types';
@@ -92,9 +93,8 @@ const CreateUserPage: React.FC = () => {
                             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                                 Password
                             </label>
-                            <Input
+                            <PasswordInput
                                 id="password"
-                                type="password"
                                 placeholder="Enter your password"
                                 value={formData.password}
                                 onChange={(e) => handleInputChange('password', e.target.value)}
