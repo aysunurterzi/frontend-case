@@ -1,13 +1,7 @@
 import { get } from 'lodash';
 import React from 'react';
 import { useFormContext } from 'react-hook-form';
-
-interface FormItemProps {
-    name: string;
-    label?: string;
-    required?: boolean;
-    children: React.ReactElement;
-}
+import { FormItemProps } from '../../types';
 
 export const FormItem: React.FC<FormItemProps> = ({ 
     name, 

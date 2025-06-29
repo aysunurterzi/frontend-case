@@ -13,7 +13,6 @@ const UserDataPage = () => {
             <div className="w-full max-w-lg">
                 <div className="text-center mb-8">
                     <h1 className="text-4xl font-bold text-gray-900 mb-2">Account Created!</h1>
-                    <p className="text-gray-600">Your account has been successfully created</p>
                 </div>
 
                 <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">

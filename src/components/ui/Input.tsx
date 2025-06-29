@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-    hasError?: boolean;
-    errorMessage?: string;
-}
+import { InputProps } from '../../types';
 
 export const Input: React.FC<InputProps> = ({
     hasError = false,
@@ -13,9 +9,8 @@ export const Input: React.FC<InputProps> = ({
     ...props
 }) => {
     const [showPassword, setShowPassword] = useState(false);
-    
+    const inputType = type === 'password' && showPassword ? 'text' : type;
     const isPasswordType = type === 'password';
-    const inputType = isPasswordType ? (showPassword ? 'text' : 'password') : type;
 
     return (
         <div className="relative">

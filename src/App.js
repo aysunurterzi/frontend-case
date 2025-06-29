@@ -6,7 +6,10 @@ import UserDataPage from './pages/UserDataPage';
 
 function App() {
     return (
-        <Router>
+        <Router future={{ 
+            v7_relativeSplatPath: true,
+            v7_startTransition: true 
+        }}>
             <Routes>
                 <Route path="/" element={<CreateUserPage />} />
                 <Route path="/user-data" element={<UserDataPage />} />

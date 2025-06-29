@@ -1,10 +1,6 @@
 import { PropsWithChildren } from 'react';
-import { FieldValues, FormProvider, useForm, UseFormProps } from 'react-hook-form';
-
-type FormComponentProps<T extends FieldValues> = {
-    onSubmit: (data: T) => void;
-    resolver?: any;
-} & Omit<UseFormProps<T>, 'resolver'>;
+import { FieldValues, FormProvider, useForm } from 'react-hook-form';
+import { FormComponentProps } from '../../types';
 
 export const Form = <T extends FieldValues>({
     onSubmit,
@@ -15,8 +11,7 @@ export const Form = <T extends FieldValues>({
 }: PropsWithChildren<FormComponentProps<T>>) => {
     const methods = useForm<T>({ 
         ...rest, 
-        resolver, 
-        defaultValues 
+        resolver
     });
 
     return (

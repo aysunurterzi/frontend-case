@@ -1,11 +1,5 @@
-import React, { ButtonHTMLAttributes } from 'react';
-
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: 'primary' | 'secondary' | 'outline' | 'danger' | 'success';
-    size?: 'sm' | 'md' | 'lg' | 'xl';
-    loading?: boolean;
-    loadingText?: string;
-}
+import React from 'react';
+import { ButtonProps } from '../../types';
 
 export const Button: React.FC<ButtonProps> = ({ 
     children, 
@@ -17,14 +11,14 @@ export const Button: React.FC<ButtonProps> = ({
     disabled,
     ...props 
 }) => {
-    const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+    const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
     
     const variantClasses = {
-        primary: 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white shadow-sm hover:shadow-md focus:ring-indigo-500',
-        secondary: 'bg-gray-600 hover:bg-gray-700 text-white shadow-sm hover:shadow-md focus:ring-gray-500',
-        outline: 'border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:ring-indigo-500',
-        danger: 'bg-red-600 hover:bg-red-700 text-white shadow-sm hover:shadow-md focus:ring-red-500',
-        success: 'bg-green-600 hover:bg-green-700 text-white shadow-sm hover:shadow-md focus:ring-green-500'
+        primary: 'bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white focus:ring-indigo-500',
+        secondary: 'bg-gray-600 hover:bg-gray-700 text-white focus:ring-gray-500',
+        outline: 'border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50 focus:ring-indigo-500',
+        danger: 'bg-red-600 hover:bg-red-700 text-white focus:ring-red-500',
+        success: 'bg-green-600 hover:bg-green-700 text-white focus:ring-green-500'
     };
     
     const sizeClasses = {
@@ -34,14 +28,12 @@ export const Button: React.FC<ButtonProps> = ({
         xl: 'px-8 py-4 text-lg'
     };
 
-    const combinedClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`.trim();
-
-    const isDisabled = disabled || loading;
+    const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
 
     return (
-        <button
-            className={combinedClasses}
-            disabled={isDisabled}
+        <button 
+            className={classes}
+            disabled={disabled || loading}
             {...props}
         >
             {loading ? (
