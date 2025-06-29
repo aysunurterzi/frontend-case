@@ -12,6 +12,12 @@ export const Input: React.FC<InputProps> = ({
     const inputType = type === 'password' && showPassword ? 'text' : type;
     const isPasswordType = type === 'password';
 
+    const getAutocomplete = () => {
+        if (isPasswordType) return 'current-password';
+        if (type === 'email') return 'email';
+        if (type === 'text' && props.id === 'fullname') return 'name';
+        return undefined;
+    };
     return (
         <div className="relative">
             <input
@@ -25,7 +31,7 @@ export const Input: React.FC<InputProps> = ({
                     }
                     ${className}
                 `}
-                autoComplete={isPasswordType ? 'current-password' : undefined}
+                autoComplete={getAutocomplete()}
                 {...props}
             />
             {isPasswordType && (
