@@ -71,12 +71,6 @@ const UserDataPage = () => {
                         </div>
                     </div>
                 </div>
-
-                <div className="text-center mt-6">
-                    <p className="text-gray-500 text-sm">
-                        Thank you for using our service!
-                    </p>
-                </div>
             </div>
         </div>
     );
