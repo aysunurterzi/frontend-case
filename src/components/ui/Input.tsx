@@ -1,13 +1,13 @@
-import React from 'react';
+import { forwardRef } from 'react';
 import { InputProps } from '../../types/index';
 
-export const Input: React.FC<InputProps> = ({
+export const Input = forwardRef<HTMLInputElement, InputProps>(({
     hasError = false,
     errorMessage,
     className = '',
     type = 'text',
     ...props
-}) => {
+}, ref) => {
     const getAutocomplete = () => {
         if (type === 'email') return 'email';
         if (type === 'text' && props.id === 'fullname') return 'name';
@@ -17,6 +17,7 @@ export const Input: React.FC<InputProps> = ({
     return (
         <div className="relative">
             <input
+                ref={ref}
                 type={type}
                 className={`
                     w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all
@@ -34,4 +35,6 @@ export const Input: React.FC<InputProps> = ({
             )}
         </div>
     );
-};
+});
+
+Input.displayName = 'Input';

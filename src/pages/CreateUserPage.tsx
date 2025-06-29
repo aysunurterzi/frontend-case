@@ -1,51 +1,45 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { Checkbox } from '../components/ui/Checkbox';
 import { Input } from '../components/ui/Input';
 import { PasswordInput } from '../components/ui/PasswordInput';
 import { UserService } from '../services/userService';
-import { ValidationService } from '../services/validationService';
-import { UserFormData, ValidationErrors } from '../types/index';
+import { UserFormData } from '../types/index';
 
 const CreateUserPage: React.FC = () => {
     const navigate = useNavigate();
-    const [formData, setFormData] = useState<UserFormData>({
-        fullname: '',
-        email: '',
-        password: '',
-        rememberMe: false,
-    });
-    const [errors, setErrors] = useState<ValidationErrors>({});
     const [isLoading, setIsLoading] = useState(false);
+    
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        watch,
+        setValue,
+    } = useForm<UserFormData>({
+        defaultValues: {
+            fullname: '',
+            email: '',
+            password: '',
+            rememberMe: false,
+        },
+        mode: 'onChange'
+    });
 
-    const validateForm = (): boolean => {
-        const newErrors = ValidationService.validateUserForm(formData);
-        setErrors(newErrors);
-        return ValidationService.isValidForm(newErrors);
-    };
+    const watchRememberMe = watch('rememberMe');
 
-    const handleInputChange = (field: keyof UserFormData, value: string | boolean) => {
-        setFormData(prev => ({ ...prev, [field]: value }));
-        // Clear error when user starts typing
-        if (errors[field as keyof ValidationErrors]) {
-            setErrors(prev => ({ ...prev, [field]: undefined }));
-        }
-    };
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (validateForm()) {
-            setIsLoading(true);
-            try {
-                await UserService.createUser(formData);
-                UserService.saveUserData(formData);
-                navigate('/user-data', { state: formData });
-            } catch (error) {
-                console.error('Error creating user:', error);
-            } finally {
-                setIsLoading(false);
-            }
+    const onSubmit = async (data: UserFormData) => {
+        setIsLoading(true);
+        try {
+            await UserService.createUser(data);
+            UserService.saveUserData(data);
+            navigate('/user-data', { state: data });
+        } catch (error) {
+            console.error('Error creating user:', error);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -57,7 +51,7 @@ const CreateUserPage: React.FC = () => {
                 </div>
 
                 <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
-                    <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
                         <div className="space-y-2">
                             <label htmlFor="fullname" className="block text-sm font-medium text-gray-700">
                                 Full Name
@@ -66,10 +60,9 @@ const CreateUserPage: React.FC = () => {
                                 id="fullname"
                                 type="text"
                                 placeholder="Enter your full name"
-                                value={formData.fullname}
-                                onChange={(e) => handleInputChange('fullname', e.target.value)}
+                                {...register('fullname')}
                                 hasError={!!errors.fullname}
-                                errorMessage={errors.fullname}
+                                errorMessage={errors.fullname?.message}
                             />
                         </div>
 
@@ -82,10 +75,15 @@ const CreateUserPage: React.FC = () => {
                                 id="email"
                                 type="email"
                                 placeholder="Enter your email"
-                                value={formData.email}
-                                onChange={(e) => handleInputChange('email', e.target.value)}
+                                {...register('email', {
+                                    required: 'Please input your email!',
+                                    pattern: {
+                                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                        message: 'Invalid email address'
+                                    }
+                                })}
                                 hasError={!!errors.email}
-                                errorMessage={errors.email}
+                                errorMessage={errors.email?.message}
                                 required
                             />
                         </div>
@@ -98,10 +96,19 @@ const CreateUserPage: React.FC = () => {
                             <PasswordInput
                                 id="password"
                                 placeholder="Enter your password"
-                                value={formData.password}
-                                onChange={(e) => handleInputChange('password', e.target.value)}
+                                {...register('password', {
+                                    required: 'Please input your password!',
+                                    minLength: {
+                                        value: 6,
+                                        message: 'Password must be at least 6 characters long'
+                                    },
+                                    pattern: {
+                                        value: /^[a-zA-Z0-9]+$/,
+                                        message: 'Password must be alphanumeric'
+                                    }
+                                })}
                                 hasError={!!errors.password}
-                                errorMessage={errors.password}
+                                errorMessage={errors.password?.message}
                                 required
                             />
                         </div>
@@ -109,8 +116,11 @@ const CreateUserPage: React.FC = () => {
                         <Checkbox
                             id="rememberMe"
                             label="Remember me"
-                            checked={formData.rememberMe}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('rememberMe', e.target.checked)}
+                            checked={watchRememberMe}
+                            {...register('rememberMe')}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                setValue('rememberMe', e.target.checked);
+                            }}
                         />
 
                         <div className="pt-4">

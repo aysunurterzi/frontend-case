@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import { forwardRef, useState } from 'react';
 import { InputProps } from '../../types/index';
 
-export const PasswordInput: React.FC<InputProps> = ({
+export const PasswordInput = forwardRef<HTMLInputElement, InputProps>(({
     hasError = false,
     errorMessage,
     className = '',
     ...props
-}) => {
+}, ref) => {
     const [showPassword, setShowPassword] = useState(false);
     const inputType = showPassword ? 'text' : 'password';
 
     return (
         <div className="relative">
             <input
+                ref={ref}
                 type={inputType}
                 className={`
                     w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all pr-12
@@ -48,4 +49,6 @@ export const PasswordInput: React.FC<InputProps> = ({
             )}
         </div>
     );
-}; 
+});
+
+PasswordInput.displayName = 'PasswordInput';
