@@ -6,7 +6,7 @@ import { Input } from '../components/ui/Input';
 import { PasswordInput } from '../components/ui/PasswordInput';
 import { UserService } from '../services/userService';
 import { ValidationService } from '../services/validationService';
-import { UserFormData, ValidationErrors } from '../types';
+import { UserFormData, ValidationErrors } from '../types/index';
 
 const CreateUserPage: React.FC = () => {
     const navigate = useNavigate();
@@ -108,7 +108,7 @@ const CreateUserPage: React.FC = () => {
                             id="rememberMe"
                             label="Remember me"
                             checked={formData.rememberMe}
-                            onChange={(e) => handleInputChange('rememberMe', e.target.checked)}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('rememberMe', e.target.checked)}
                         />
 
                         <div className="pt-4">

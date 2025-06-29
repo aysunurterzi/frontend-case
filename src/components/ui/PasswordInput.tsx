@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { InputProps } from '../../types';
+import { InputProps } from '../../types/index';
 
 export const PasswordInput: React.FC<InputProps> = ({
     hasError = false,

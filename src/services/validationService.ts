@@ -1,4 +1,4 @@
-import { UserFormData, ValidationErrors } from '../types';
+import { UserFormData, ValidationErrors } from '../types/index';
 
 export class ValidationService {
     static validateUserForm(formData: UserFormData): ValidationErrors {
