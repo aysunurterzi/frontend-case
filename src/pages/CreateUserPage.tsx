@@ -76,6 +76,7 @@ const CreateUserPage: React.FC = () => {
                         <div className="space-y-2">
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                 Email Address
+                                <span className="text-red-500 ml-1">*</span>
                             </label>
                             <Input
                                 id="email"
@@ -92,6 +93,7 @@ const CreateUserPage: React.FC = () => {
                         <div className="space-y-2">
                             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                                 Password
+                                <span className="text-red-500 ml-1">*</span>
                             </label>
                             <PasswordInput
                                 id="password"
