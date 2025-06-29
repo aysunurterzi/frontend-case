@@ -1,3 +1,4 @@
+import i18n from '../locales';
 import { UserFormData, ValidationErrors } from '../types/index';
 
 export class ValidationService {
@@ -6,18 +7,18 @@ export class ValidationService {
 
         // Email validation
         if (!formData.email.trim()) {
-            errors.email = 'Please input your email!';
+            errors.email = (i18n as any).t('validation.emailRequired');
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-            errors.email = 'Invalid email address';
+            errors.email = (i18n as any).t('validation.emailInvalid');
         }
 
         // Password validation
         if (!formData.password.trim()) {
-            errors.password = 'Please input your password!';
+            errors.password = (i18n as any).t('validation.passwordRequired');
         } else if (formData.password.length < 6) {
-            errors.password = 'Password must be at least 6 characters long';
+            errors.password = (i18n as any).t('validation.passwordMinLength');
         } else if (!/^[a-zA-Z0-9]+$/.test(formData.password)) {
-            errors.password = 'Password must be alphanumeric';
+            errors.password = (i18n as any).t('validation.passwordAlphanumeric');
         }
 
         return errors;

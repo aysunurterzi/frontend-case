@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
 import { Checkbox } from '../components/ui/Checkbox';
 import { Input } from '../components/ui/Input';
+import LanguageSwitch from '../components/ui/LanguageSwitch';
 import { PasswordInput } from '../components/ui/PasswordInput';
 import { UserService } from '../services/userService';
 import { ValidationService } from '../services/validationService';
@@ -10,6 +12,7 @@ import { UserFormData, ValidationErrors } from '../types/index';
 
 const CreateUserPage: React.FC = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
     const [formData, setFormData] = useState<UserFormData>({
         fullname: '',
         email: '',
@@ -42,7 +45,7 @@ const CreateUserPage: React.FC = () => {
                 UserService.saveUserData(formData);
                 navigate('/user-data', { state: formData });
             } catch (error) {
-                console.error('Error creating user:', error);
+                // Hata durumunda sessizce devam et
             } finally {
                 setIsLoading(false);
             }
@@ -51,21 +54,22 @@ const CreateUserPage: React.FC = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-4">
+            <LanguageSwitch />
             <div className="w-full max-w-lg">
                 <div className="text-center mb-8">
-                    <h1 className="text-4xl font-bold text-gray-900 mb-2">Create Account</h1>
+                    <h1 className="text-4xl font-bold text-gray-900 mb-2">{t('createUser.title')}</h1>
                 </div>
 
                 <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
                     <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                         <div className="space-y-2">
                             <label htmlFor="fullname" className="block text-sm font-medium text-gray-700">
-                                Full Name
+                                {t('createUser.fullName')}
                             </label>
                             <Input
                                 id="fullname"
                                 type="text"
-                                placeholder="Enter your full name"
+                                placeholder={t('createUser.placeholders.fullName')}
                                 value={formData.fullname}
                                 onChange={(e) => handleInputChange('fullname', e.target.value)}
                                 hasError={!!errors.fullname}
@@ -75,13 +79,13 @@ const CreateUserPage: React.FC = () => {
 
                         <div className="space-y-2">
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                Email Address
-                                <span className="text-red-500 ml-1">*</span>
+                                {t('createUser.emailAddress')}
+                                <span className="text-red-500 ml-1">{t('common.required')}</span>
                             </label>
                             <Input
                                 id="email"
                                 type="email"
-                                placeholder="Enter your email"
+                                placeholder={t('createUser.placeholders.email')}
                                 value={formData.email}
                                 onChange={(e) => handleInputChange('email', e.target.value)}
                                 hasError={!!errors.email}
@@ -92,12 +96,12 @@ const CreateUserPage: React.FC = () => {
 
                         <div className="space-y-2">
                             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                                Password
-                                <span className="text-red-500 ml-1">*</span>
+                                {t('createUser.password')}
+                                <span className="text-red-500 ml-1">{t('common.required')}</span>
                             </label>
                             <PasswordInput
                                 id="password"
-                                placeholder="Enter your password"
+                                placeholder={t('createUser.placeholders.password')}
                                 value={formData.password}
                                 onChange={(e) => handleInputChange('password', e.target.value)}
                                 hasError={!!errors.password}
@@ -108,7 +112,7 @@ const CreateUserPage: React.FC = () => {
 
                         <Checkbox
                             id="rememberMe"
-                            label="Remember me"
+                            label={t('createUser.rememberMe')}
                             checked={formData.rememberMe}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleInputChange('rememberMe', e.target.checked)}
                         />
@@ -119,11 +123,11 @@ const CreateUserPage: React.FC = () => {
                                 variant="primary"
                                 size="lg"
                                 loading={isLoading}
-                                loadingText="Creating Account..."
+                                loadingText={t('createUser.buttons.creatingAccount')}
                                 className="w-full h-12 text-base font-semibold transform hover:scale-[1.02]"
                                 disabled={isLoading}
                             >
-                                Create Account
+                                {t('createUser.buttons.createAccount')}
                             </Button>
                         </div>
                     </form>

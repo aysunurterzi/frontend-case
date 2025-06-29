@@ -1,0 +1,51 @@
+{
+  "navigation": {
+    "language": "Language"
+  },
+  "createUser": {
+    "title": "Create Account",
+    "fullName": "Full Name",
+    "emailAddress": "Email Address",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "placeholders": {
+      "fullName": "Enter your full name",
+      "email": "Enter your email",
+      "password": "Enter your password"
+    },
+    "buttons": {
+      "createAccount": "Create Account",
+      "creatingAccount": "Creating Account..."
+    }
+  },
+  "userData": {
+    "title": "Account Created!",
+    "success": "Success!",
+    "accountInfo": "Account Information",
+    "labels": {
+      "fullName": "Full Name:",
+      "email": "Email:",
+      "password": "Password:",
+      "rememberMe": "Remember Me:"
+    },
+    "values": {
+      "yes": "Yes",
+      "no": "No",
+      "notProvided": "Not provided",
+      "passwordMask": "••••••••"
+    },
+    "buttons": {
+      "createAnother": "Create Another Account"
+    }
+  },
+  "validation": {
+    "emailRequired": "Please input your email!",
+    "emailInvalid": "Invalid email address",
+    "passwordRequired": "Please input your password!",
+    "passwordMinLength": "Password must be at least 6 characters long",
+    "passwordAlphanumeric": "Password must be alphanumeric"
+  },
+  "common": {
+    "required": "*"
+  }
+} 

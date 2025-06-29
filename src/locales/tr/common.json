@@ -1,0 +1,51 @@
+{
+  "navigation": {
+    "language": "Dil"
+  },
+  "createUser": {
+    "title": "Hesap Oluştur",
+    "fullName": "Ad Soyad",
+    "emailAddress": "E-posta Adresi",
+    "password": "Şifre",
+    "rememberMe": "Beni hatırla",
+    "placeholders": {
+      "fullName": "Ad soyadınızı giriniz",
+      "email": "E-posta adresinizi giriniz",
+      "password": "Şifrenizi giriniz"
+    },
+    "buttons": {
+      "createAccount": "Hesap Oluştur",
+      "creatingAccount": "Hesap Oluşturuluyor..."
+    }
+  },
+  "userData": {
+    "title": "Hesap Oluşturuldu!",
+    "success": "Başarılı!",
+    "accountInfo": "Hesap Bilgileri",
+    "labels": {
+      "fullName": "Ad Soyad:",
+      "email": "E-posta:",
+      "password": "Şifre:",
+      "rememberMe": "Beni Hatırla:"
+    },
+    "values": {
+      "yes": "Evet",
+      "no": "Hayır",
+      "notProvided": "Belirtilmedi",
+      "passwordMask": "••••••••"
+    },
+    "buttons": {
+      "createAnother": "Yeni Hesap Oluştur"
+    }
+  },
+  "validation": {
+    "emailRequired": "Lütfen e-posta adresinizi giriniz!",
+    "emailInvalid": "Geçersiz e-posta adresi",
+    "passwordRequired": "Lütfen şifrenizi giriniz!",
+    "passwordMinLength": "Şifre en az 6 karakter olmalıdır",
+    "passwordAlphanumeric": "Şifre sadece harf ve rakam içermelidir"
+  },
+  "common": {
+    "required": "*"
+  }
+} 
