@@ -37,8 +37,7 @@ src/
 │   ├── CreateUserPage.tsx      # User registration form page
 │   └── UserDataPage.tsx        # User data display success page
 ├── services/
-│   ├── userService.ts          # User operations service
-│   └── validationService.ts    # Form validation service
+│   └── userService.ts          # User operations service
 ├── types/
 │   ├── index.ts                # Main type exports
 │   ├── ui/                     # UI component types
@@ -49,7 +48,6 @@ src/
 │   │   └── index.ts
 │   └── user/                   # User-related types
 │       ├── UserFormData.ts     # User form data type
-│       ├── ValidationErrors.ts # Validation error type
 │       └── index.ts
 ├── App.tsx                     # Main application component with routing
 ├── App.css                     # Application styles
@@ -190,10 +188,6 @@ The application implements client-side validation with the following rules:
 - `createUser()`: User creation simulation (1 second delay)
 - `saveUserData()`: Save user data to LocalStorage
 - `getUserData()`: Read user data from LocalStorage
-
-### ValidationService
-- `validateUserForm()`: Validate form data
-- `isValidForm()`: Check form validity
 
 ## 🎨 Design Features
 
